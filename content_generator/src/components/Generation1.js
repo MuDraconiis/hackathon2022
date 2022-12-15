@@ -45,11 +45,6 @@ const generateImage = async () => {
     setResult(res.data.data[0].url);
     console.log(res.data.data[0].url);
 
-    {result.length > 0 ? (
-         <img className="result-image" src={result} alt="result" />
-       ) : (
-         <></>
-       )}
   };
 
 
