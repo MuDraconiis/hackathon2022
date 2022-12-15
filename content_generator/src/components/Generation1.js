@@ -45,12 +45,8 @@ const generateImage = async () => {
     setResult(res.data.data[0].url);
     console.log(res.data.data[0].url);
     console.log(result);
-
-    {result.length > 0 ? (
-         <img className="result-image" src={result} alt="result" />
-       ) : (
-         <></>
-       )}
+    
+    
   };
 
 
@@ -68,6 +64,12 @@ const generateImage = async () => {
                         cols="40"
                     />
                     <Button onClick={generateImage}>Generate an Image</Button>
+
+                    {result.length > 0 ? (
+                        <img className="result-image" src={result} alt="result" />
+                    ) : (
+                        <></>
+                    )}
                 </>
             </div>
         </div>

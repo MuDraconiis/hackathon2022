@@ -51,26 +51,36 @@ export default function Generation() {
         
         const openai = new OpenAIApi(configuration);
         console.log(inputs)
-        const responseText = await openai.createCompletion({
+        const responseArgVente = await openai.createCompletion({
             model: "text-davinci-003",
             prompt: "Ecrire un argument de vente pour une application" +
-                    "selon cette description: " + prompt + " de couleur " + inputs['select1'] +  " il " + inputs['select2'],
-            max_tokens: 100,
-            temperature: 0.8,
+                    "selon cette description: " + prompt,
+            max_tokens: 300,
+            presence_penalty: 2,
+            temperature: 1,
+            n: 10,
+        });
+
+        const responseTitre = await openai.createCompletion({
+            model: "text-davinci-003",
+            prompt: "Donne moi un nom pour cette application" +
+                    "selon cette description: " + prompt,
+            max_tokens: 20,
+            presence_penalty: 2,
+            temperature: 1,
             n: 10,
         });
 
         const responseImage = await openai.createImage({
-            prompt: prompt,
+            prompt: "Give a logo without text about this application:" + prompt,
             n: 10,
             size: "512x512",
         });
         
         for(let i = 0; i < 10; i++){
-            let concat = [responseText.data.choices[i].text, responseImage.data.data[i].url]
+            let concat = [responseTitre.data.choices[i].text, responseArgVente.data.choices[i].text, responseImage.data.data[i].url]
             result[i] = concat
-        }   
-        console.log(result)         
+        }    
     }
 
 
@@ -83,7 +93,17 @@ export default function Generation() {
                 <div id="div_form">
                     <Form onSubmit={handleSubmit}>
                         <Form.Group className="mb-3">
-                            <textarea
+                            <Form.Control
+                                className="app-input"
+                                placeholder="description de ce que tu veux"
+                                onChange={(e) => setPrompt(e.target.value)}
+                                as="textarea" rows={3}
+                            />
+                        </Form.Group>
+                        <h2>Des idées précises pour paufiner votre création?</h2>
+                        <Form.Group className="mb-3">
+                            <Form.Label >Le type?</Form.Label>
+                            <Form.Control
                                 className="app-input"
                                 placeholder="description de ce que tu veux"
                                 onChange={(e) => setPrompt(e.target.value)}
@@ -92,28 +112,22 @@ export default function Generation() {
                             />
                         </Form.Group>
                         <Form.Group className="mb-3">
-                            <Form.Label>un premier select</Form.Label>
-                            <Form.Select id="select1" name="select1" onChange={handleChange}>
-                                <option></option>
-                                <option value="blanche">blanche</option>
-                                <option value="rousse">rousse</option>
-                                <option value="noire">noire</option>
-                                <option value="grise">grise</option>
-                                <option value="marron">marron</option>
-                            </Form.Select>
-                        </Form.Group>
-                        <Form.Group className="mb-3">
-                            <Form.Label>un deuxieme select</Form.Label>
-                            <Form.Select id="select2" name="select2" onChange={handleChange}>
-                                <option></option>
-                                <option value="saute">saute</option>
-                                <option value="dors">dors</option>
-                                <option value="cours">cours</option>
-                                <option value="méchant">méchant</option>
-                                <option value="joueur">joueur</option>
-                            </Form.Select>
+                            <Form.Label>La clientèle?</Form.Label>
+                            <Form.Control
+                                className="app-input"
+                                placeholder="description de ce que tu veux"
+                                onChange={(e) => setPrompt(e.target.value)}
+     
+                            />
                         </Form.Group>
                         <Button type="submit">Générer</Button>
+                        {
+                            result[0] != null ? (
+                                <img className="result-image" src={result[0][2]} alt="result" />
+                            ) : (
+                                <></>
+                            )
+                        }
                     </Form>
                 </div>
             </div>
