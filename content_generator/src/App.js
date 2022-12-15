@@ -3,6 +3,7 @@ import './App.css';
 import Accueil from './components/Accueil';
 import Generation from './components/Generation';
 import Generation1 from './components/Generation1';
+import Generation2 from './components/Generation2';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route index element={<Accueil />} />
           <Route path="generation" element={<Generation />} />
           <Route path="generation1" element={<Generation1 />} />
+          <Route path="generation2" element={<Generation2 />} />
         </Routes>
       </BrowserRouter>
 
