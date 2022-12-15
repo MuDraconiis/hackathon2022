@@ -179,6 +179,14 @@ export default function Generation0() {
                         <img className="img_article" src={images[9]}></img>
                         <div className="text_article">{textes[9]}</div>
                     </div>
+                    <div id="article11" className="article">
+                        <img className="img_article" src={images[0]}></img>
+                        <div className="text_article">{textes[0]}</div>
+                    </div>
+                    <div id="article12" className="article">
+                        <img className="img_article" src={images[2]}></img>
+                        <div className="text_article">{textes[2]}</div>
+                    </div>
     
                 </div>
             </div>
