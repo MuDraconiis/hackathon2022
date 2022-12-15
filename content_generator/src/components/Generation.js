@@ -25,7 +25,7 @@ export default function Generation() {
     const [inputs, setInputs] = useState([]);
     const [result, setResult] = useState([]);
     const [prompt, setPrompt] = useState("");
-    const [concat, setConcat] = useState();
+    const [concat, setConcat] = useState([]);
     const [submit, setSubmit] = useState(false);
     console.log(result)
     
@@ -48,12 +48,12 @@ export default function Generation() {
         console.log(inputs)
         const responseArgVente = await openai.createCompletion({
             model: "text-davinci-003",
-            prompt: "Ecrire un argument de vente pour une application" +
+            prompt: "Ecrire un résumé de cette application" +
                     "selon cette description: " + prompt,
             max_tokens: 300,
             presence_penalty: 2,
             temperature: 1,
-            n: 10,
+            n: 12,
         });
 
         const responseTitre = await openai.createCompletion({
@@ -63,22 +63,23 @@ export default function Generation() {
             max_tokens: 20,
             presence_penalty: 2,
             temperature: 1,
-            n: 10,
+            n: 12,
         });
 
         const responseImage = await openai.createImage({
             prompt: "Give a logo without text about this application:" + prompt,
-            n: 10,
+            n: 12,
             size: "256x256",
         });
-        for(let i = 0; i < 10; i++){
+        for(let i = 0; i < 12; i++){
             setConcat([responseTitre.data.choices[i].text, responseArgVente.data.choices[i].text, responseImage.data.data[i].url])
         }
         setSubmit(true)
     }
 
     useEffect(() => {
-        for(let i = 0; i < 10; i++){
+        for(let i = 0; i < 12; i++){
+            console.log(concat)
             result[i] = concat
         } 
         console.log(result)
@@ -137,7 +138,7 @@ export default function Generation() {
                                         <Form.Label>Un état d'esprit?</Form.Label>
                                         <Form.Control
                                             className="app-input"
-                                            placeholder="Ex: Le partage, le sérieux, l'entrain..."
+                                            placeholder="Ex: Le partage, le sérieux, l'entrain!"
                                             onChange={(e) => setPrompt(e.target.value)}
 
                                         />
