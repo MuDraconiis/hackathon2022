@@ -44,9 +44,6 @@ const generateImage = async () => {
 
     setResult(res.data.data[0].url);
     console.log(res.data.data[0].url);
-    console.log(result);
-    
-    
   };
 
 

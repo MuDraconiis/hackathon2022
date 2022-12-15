@@ -30,7 +30,8 @@
   margin-bottom: 5%;
   /* height: 62vh; */
   grid-template-columns: repeat(3, 1.2fr);
-  grid-template-rows: 50px 50px 250px 50px 50px 50px 250px 50px 50px 50px 250px 50px 50px 300px ;
+  /* grid-template-rows: 50px 50px 250px 50px 50px 50px 250px 50px 50px 50px 250px 50px 50px 300px ; */
+  grid-template-rows: 50px 50px 250px 50px 50px 50px 50px 300px 100px 50px 50px 450px 50px 450px;
   /*grid-template-rows:  1fr 1fr 1fr 1fr;
   grid-template-areas:
         "article1 article2 article3"
@@ -43,7 +44,7 @@
 
 .article {
   width: 300px;
-  height: 400px; /*350*/
+  /* height: 400px; 350 */
   margin: auto;
   justify-content: center;
   align-items: center;
@@ -52,7 +53,7 @@
 
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 2fr;
+  /* grid-template-rows: 1fr 2fr; */
   grid-template-areas:
       "img_area"
       "text_area"
@@ -87,7 +88,7 @@
 
 #article4 {
   /* grid-area: article4; */
-  grid-row-start: 5;
+  grid-row-start: 6; /*5*/
   grid-row-end: 8;
   grid-column-start: 1; 
   grid-column-end: 2;
@@ -95,7 +96,7 @@
 
 #article5 {
   /* grid-area: article5; */
-  grid-row-start: 6;
+  grid-row-start: 7; /*6*/
   grid-row-end: 9;
   grid-column-start: 2; 
   grid-column-end: 3;
@@ -103,7 +104,7 @@
 
 #article6 {
   /* grid-area: article6; */
-  grid-row-start: 7;
+  grid-row-start: 8;/*7*/
   grid-row-end: 10;
   grid-column-start: 3; 
   grid-column-end: 4;
@@ -111,7 +112,7 @@
 
 #article7 {
   /* grid-area: article8; */
-  grid-row-start: 9;
+  grid-row-start: 10;/*9*/
   grid-row-end: 12;
   grid-column-start: 1; 
   grid-column-end: 2;
@@ -119,7 +120,7 @@
 
 #article8 {
   /* grid-area: article9; */
-  grid-row-start: 9;
+  grid-row-start: 11;/*9*/
   grid-row-end: 13;
   grid-column-start: 2; 
   grid-column-end: 3;
@@ -127,7 +128,7 @@
 
 #article9 {
   /* grid-area: article10; */
-  grid-row-start: 11;
+  grid-row-start: 12;
   grid-row-end: 14;
   grid-column-start: 3; 
   grid-column-end: 4;
@@ -142,7 +143,7 @@
 }
 
 .img_article {
-  width: 80%;
+  width: 100%;
   grid-area: img_area;
   margin: auto;
 }

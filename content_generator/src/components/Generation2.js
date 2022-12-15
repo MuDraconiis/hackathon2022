@@ -69,6 +69,14 @@ export default function Generation1() {
                     <img className="img_article" src={require('.././media/banane.png')}></img>
                     <div className="text_article">le texte</div>
                 </div>
+                <div id="article11" className="article">
+                    <img className="img_article" src={require('.././media/banane.png')}></img>
+                    <div className="text_article">le texte</div>
+                </div>
+                <div id="article12" className="article">
+                    <img className="img_article" src={require('.././media/banane.png')}></img>
+                    <div className="text_article">le texte</div>
+                </div>
 
             </div>
         </div>
