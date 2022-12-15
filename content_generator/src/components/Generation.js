@@ -25,12 +25,10 @@ export default function Generation() {
     const [inputs, setInputs] = useState([]);
     const [result, setResult] = useState([]);
     const [prompt, setPrompt] = useState("");
-
-    useEffect(() => {
-            
-        
-    }
-    )
+    const [concat, setConcat] = useState();
+    const [submit, setSubmit] = useState(false);
+    console.log(result)
+    
 
     const handleChange = (event) => {
         const name = event.target.name;
@@ -42,9 +40,6 @@ export default function Generation() {
 
     async function handleSubmit(event) {
         event.preventDefault();
-        console.log(inputs["firstinput"]);
-        console.log(process.env.REACT_APP_Open_AI_Key, "sasa")
-
         const configuration = new Configuration({
             apiKey: process.env.REACT_APP_Open_AI_Key,
         });
@@ -74,15 +69,20 @@ export default function Generation() {
         const responseImage = await openai.createImage({
             prompt: "Give a logo without text about this application:" + prompt,
             n: 10,
-            size: "512x512",
+            size: "256x256",
         });
-        
         for(let i = 0; i < 10; i++){
-            let concat = [responseTitre.data.choices[i].text, responseArgVente.data.choices[i].text, responseImage.data.data[i].url]
-            result[i] = concat
-        }    
+            setConcat([responseTitre.data.choices[i].text, responseArgVente.data.choices[i].text, responseImage.data.data[i].url])
+        }
+        setSubmit(true)
     }
 
+    useEffect(() => {
+        for(let i = 0; i < 10; i++){
+            result[i] = concat
+        } 
+        console.log(result)
+    })
 
     return (
         <div>{MyBody()}
@@ -100,29 +100,57 @@ export default function Generation() {
                                 as="textarea" rows={3}
                             />
                         </Form.Group>
-                        <h2>Des idées précises pour paufiner votre création?</h2>
-                        <Form.Group className="mb-3">
-                            <Form.Label >Le type?</Form.Label>
-                            <Form.Control
-                                className="app-input"
-                                placeholder="description de ce que tu veux"
-                                onChange={(e) => setPrompt(e.target.value)}
-                                rows="10"
-                                cols="40"
-                            />
-                        </Form.Group>
-                        <Form.Group className="mb-3">
-                            <Form.Label>La clientèle?</Form.Label>
-                            <Form.Control
-                                className="app-input"
-                                placeholder="description de ce que tu veux"
-                                onChange={(e) => setPrompt(e.target.value)}
-     
-                            />
-                        </Form.Group>
+                        {
+                            submit == true ? (
+                                <>
+                                    <h2>Des idées précises pour paufiner votre création?</h2>
+                                    <Form.Group className="mb-3">
+                                        <Form.Label >Un thème?</Form.Label>
+                                        <Form.Control
+                                            className="app-input"
+                                            placeholder="Ex: Nature, animaux, science, technologie..."
+                                            onChange={(e) => setPrompt(e.target.value)}
+                                            rows="10"
+                                            cols="40"
+                                        />
+
+                                    </Form.Group>
+                                    <Form.Group className="mb-3">
+                                        <Form.Label>Une clientèle visée?</Form.Label>
+                                        <Form.Control
+                                            className="app-input"
+                                            placeholder="Ex: Organisation, particulier, catégorie de personne..."
+                                            onChange={(e) => setPrompt(e.target.value)}
+
+                                        />
+                                    </Form.Group>
+                                    <Form.Group className="mb-3">
+                                        <Form.Label>Ce que vous proposez?</Form.Label>
+                                        <Form.Control
+                                            className="app-input"
+                                            placeholder="Ex: De la vente, des services... ou même du bénévolat!"
+                                            onChange={(e) => setPrompt(e.target.value)}
+
+                                        />
+                                    </Form.Group>
+                                    <Form.Group className="mb-3">
+                                        <Form.Label>Un état d'esprit?</Form.Label>
+                                        <Form.Control
+                                            className="app-input"
+                                            placeholder="Ex: Le partage, le sérieux, l'entrain..."
+                                            onChange={(e) => setPrompt(e.target.value)}
+
+                                        />
+                                    </Form.Group>
+                                </>
+                            ) : (
+                                <></>
+                            )
+                        }
+
                         <Button type="submit">Générer</Button>
                         {
-                            result[0] != null ? (
+                            submit == true ? (
                                 <img className="result-image" src={result[0][2]} alt="result" />
                             ) : (
                                 <></>
