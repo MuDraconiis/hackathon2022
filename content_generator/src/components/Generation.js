@@ -22,8 +22,7 @@ function MyBody() {
 
 export default function Generation() {
     
-    const [inputs, setInputs] = useState([]);
-    const [text, setText] = useState("");   
+    const [inputs, setInputs] = useState([]);  
 
     const handleChange = (event) => {
         const name = event.target.name;
