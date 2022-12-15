@@ -46,11 +46,11 @@ const generateImage = async () => {
     console.log(res.data.data[0].url);
     console.log(result);
 
-    // {result.length > 0 ? (
-    //     <img className="result-image" src={result} alt="result" />
-    //   ) : (
-    //     <></>
-    //   )}
+    {result.length > 0 ? (
+         <img className="result-image" src={result} alt="result" />
+       ) : (
+         <></>
+       )}
   };
 
 
@@ -58,7 +58,7 @@ const generateImage = async () => {
         <div>{MyBody()}
             <div className="app-main">
                 <>
-                    <h2>Generate an Image using Open AI API</h2>
+                    <h2>Avez vous une idée de l'application de vos rêves? Dites nous tout...</h2>
 
                     <textarea
                         className="app-input"

@@ -24,6 +24,7 @@ export default function Generation() {
     
     const [inputs, setInputs] = useState([]);
     const [result, setResult] = useState([]);
+    const [prompt, setPrompt] = useState("");
 
     useEffect(() => {
             
@@ -52,14 +53,15 @@ export default function Generation() {
         console.log(inputs)
         const responseText = await openai.createCompletion({
             model: "text-davinci-003",
-            prompt: "Ecrit une description courte d'un " + inputs['firstinput'] + " de couleur " + inputs['select1'] +  " il " + inputs['select2'],
+            prompt: "Ecrire un argument de vente pour une application" +
+                    "selon cette description: " + prompt + " de couleur " + inputs['select1'] +  " il " + inputs['select2'],
             max_tokens: 100,
             temperature: 0.8,
             n: 10,
         });
 
         const responseImage = await openai.createImage({
-            prompt: inputs["firstinput"] + inputs["select1"] + inputs["select2"],
+            prompt: prompt,
             n: 10,
             size: "512x512",
         });
@@ -76,13 +78,18 @@ export default function Generation() {
         <div>{MyBody()}
             <div>
                 <h1>
-                    ici le formulaire
+                    Avez vous une idée de l'application de vos rêves? Dites nous tout...
                 </h1>
                 <div id="div_form">
                     <Form onSubmit={handleSubmit}>
                         <Form.Group className="mb-3">
-                            <Form.Label>un input</Form.Label>
-                            <Form.Control id="firstinput" name="firstinput" placeholder="quelque chose" onChange={handleChange} />
+                            <textarea
+                                className="app-input"
+                                placeholder="description de ce que tu veux"
+                                onChange={(e) => setPrompt(e.target.value)}
+                                rows="10"
+                                cols="40"
+                            />
                         </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>un premier select</Form.Label>
