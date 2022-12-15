@@ -16,8 +16,7 @@ function MyBody () {
 
   return <div >
     <h1>COUCOU HACKATHON</h1>
-    <Link to="generation1">Go to form</Link>
-    <Link to="generation2">page des articles</Link>
+    <Link to="generation">Go to form</Link>
   </div>
         
 }
