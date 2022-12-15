@@ -3,26 +3,27 @@ import { useEffect, useState } from "react";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { Configuration, OpenAIApi } from "openai";
-
+import axios from "axios";
 
 function MyBody() {
 
     useEffect(() => {
-        /***********************************/
-        //code
-        /*************************************/
+            
+        
     }
     )
-
     return <div>
 
     </div>
 
 }
 
-export default function Generation() {
 
+
+export default function Generation() {
+    
     const [inputs, setInputs] = useState([]);
+    const [text, setText] = useState("");   
 
     const handleChange = (event) => {
         const name = event.target.name;
@@ -30,29 +31,27 @@ export default function Generation() {
         setInputs(values => ({ ...values, [name]: value }));
     }
 
+
     async function handleSubmit(event) {
         event.preventDefault();
-        console.log(inputs);
+        console.log(inputs["firstinput"]);
+        console.log(process.env.REACT_APP_Open_AI_Key, "sasa")
 
-        ///////OPENAPI
-    // const configuration = new Configuration({
-    //     apiKey: "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",
-    //   });
-    //   const openai = new OpenAIApi(configuration);
-  
-    //   openai
-    //     .createCompletion("text-davinci-002", {
-    //       prompt: `Write a detailed blog for 5 fruits`,
-    //       temperature: 0.8,
-    //       max_tokens: 500,
-    //       top_p: 1,
-    //       frequency_penalty: 0,
-    //       presence_penalty: 0,
-    //     })
-    //     .then((response) => {
-    //         console.log(response.data.choices[0].text)
-    //     });
-
+        const configuration = new Configuration({
+            apiKey: process.env.REACT_APP_Open_AI_Key,
+        });
+        
+        const openai = new OpenAIApi(configuration);
+        const response = await openai.createCompletion({
+            model: "text-davinci-003",
+            prompt: inputs["firstinput"],
+            max_tokens: 100,
+            temperature: 0.8,
+            n: 10,
+        });
+        console.log(response.data)
+        response.data.choices.map((choice) => console.log(choice.text))
+            
     }
 
 
