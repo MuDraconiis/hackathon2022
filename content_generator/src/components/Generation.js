@@ -29,7 +29,6 @@ export default function Generation() {
     const [textes, setTextes] = useState([]);
     const [texte1, setTexte1] = useState([]);
     const [images, setImages] = useState([]);
-    const [submit, setSubmit] = useState(false);
     const [promptCli, setPromptCli] = useState("");
     const [promptPro, setPromptPro] = useState("");
     const [promptThe, setPromptThe] = useState("");
@@ -55,7 +54,7 @@ export default function Generation() {
         console.log(inputs)
         const responseArgVente = await openai.createCompletion({
             model: "text-davinci-003",
-            prompt: "Ecrit un résumé de cette application" +
+            prompt: "Ecrit un résumé de cette application sans titre" +
                 "selon cette description: " + prompt + " mot clé:" + promptThe +
                 promptCli + promptPro + promptEsp,
             max_tokens: 100,
@@ -67,18 +66,18 @@ export default function Generation() {
         const responseTitre = await openai.createCompletion({
             model: "text-davinci-003",
             prompt: "Donne un nom à cette application en un mot" +
-                "selon cette description: " + prompt + " mot clé:"+ promptThe +
-               promptCli + promptPro + promptEsp,
+                "selon cette description: " + prompt + " mot clé:" + promptThe +
+                promptCli + promptPro + promptEsp,
             max_tokens: 20,
             presence_penalty: 2,
             temperature: 1,
             n: 10,
-            stop: " ",
+            stop: " " + ".",
         });
         console.log(prompt)
         const responseImage = await openai.createImage({
             prompt: "Donne un logo à cette application:" + prompt + " mot clé:" + promptThe +
-            promptCli + promptPro + promptEsp,
+                promptCli + promptPro + promptEsp,
             n: 10,
             size: "256x256",
         });
@@ -93,7 +92,6 @@ export default function Generation() {
             images[i] = responseImage.data.data[i].url;
         }
         setTexte1(responseArgVente.data.choices[0].text)
-        setSubmit(true)
     }
 
     useEffect(() => {
@@ -114,70 +112,62 @@ export default function Generation() {
                         <Form.Group className="mb-3">
                             <Form.Control
                                 className="app-input"
-                                placeholder="description de ce que tu veux"
+                                placeholder="Décrivez l'application que vous souhaitez"
                                 onChange={(e) => setPrompt(e.target.value)}
                                 as="textarea" rows={3}
                             />
                         </Form.Group>
-                        {
-                            submit == true ? (
-                                <>
-                                    <h2>Des idées précises pour paufiner votre création?</h2>
-                                    <Form.Group className="mb-3">
-                                        <Form.Label >Un thème?</Form.Label>
-                                        <Form.Control
-                                            className="app-input"
-                                            placeholder="Ex: Nature, animaux, science, technologie..."
-                                            onChange={(e) => setPromptThe(e.target.value)}
-                                            rows="10"
-                                            cols="40"
-                                        />
 
-                                    </Form.Group>
-                                    <Form.Group className="mb-3">
-                                        <Form.Label>Une clientèle visée?</Form.Label>
-                                        <Form.Control
-                                            className="app-input"
-                                            placeholder="Ex: Organisation, particulier, catégorie de personne..."
-                                            onChange={(e) => setPromptCli(e.target.value)}
+                        <h2>Des idées précises pour paufiner votre création?</h2>
+                        <Form.Group className="mb-3">
+                            <Form.Label >Un thème?</Form.Label>
+                            <Form.Control
+                                className="app-input"
+                                placeholder="Ex: Nature, animaux, science, technologie..."
+                                onChange={(e) => setPromptThe(e.target.value)}
+                                rows="10"
+                                cols="40"
+                            />
 
-                                        />
-                                    </Form.Group>
-                                    <Form.Group className="mb-3">
-                                        <Form.Label>Ce que vous proposez?</Form.Label>
-                                        <Form.Control
-                                            className="app-input"
-                                            placeholder="Ex: De la vente, des services... ou même du bénévolat!"
-                                            onChange={(e) => setPromptPro(e.target.value)}
+                        </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Une clientèle visée?</Form.Label>
+                            <Form.Control
+                                className="app-input"
+                                placeholder="Ex: Organisation, particulier, catégorie de personne..."
+                                onChange={(e) => setPromptCli(e.target.value)}
 
-                                        />
-                                    </Form.Group>
-                                    <Form.Group className="mb-3">
-                                        <Form.Label>Un état d'esprit?</Form.Label>
-                                        <Form.Control
-                                            className="app-input"
-                                            placeholder="Ex: Le partage, le sérieux, l'entrain!"
-                                            onChange={(e) => setPromptEsp(e.target.value)}
+                            />
+                        </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Ce que vous montrez?</Form.Label>
+                            <Form.Control
+                                className="app-input"
+                                placeholder="Ex: Des produits diverses, de l'information ou de la communication!"
+                                onChange={(e) => setPromptPro(e.target.value)}
 
-                                        />
-                                    </Form.Group>
-                                </>
-                            ) : (
-                                <></>
-                            )
-                        }
+                            />
+                        </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Un état d'esprit?</Form.Label>
+                            <Form.Control
+                                className="app-input"
+                                placeholder="Ex: Le partage, le sérieux, l'entrain!"
+                                onChange={(e) => setPromptEsp(e.target.value)}
 
+                            />
+                        </Form.Group>
                         <Button type="submit">Générer</Button>
                         {images.length > 0 ? (
                             <div id="main_container">
                                 <div id="articles_container" className="">
                                     <div id="article1" className="article">
-                                    <h4>{titres[0]}</h4>
+                                        <h4>{titres[0]}</h4>
                                         <img className="img_article" src={images[0]}></img>
                                         <div className="text_article">{texte1}...</div>
-                                    </div>                                    
+                                    </div>
                                     <div id="article2" className="article">
-                                    <h4>{titres[1]}</h4>
+                                        <h4>{titres[1]}</h4>
                                         <img className="img_article" src={images[1]}></img>
                                         <div className="text_article">{textes[1]}...</div>
                                     </div>
