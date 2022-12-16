@@ -14,11 +14,15 @@ function MyBody () {
   }//faire un return function ici si on veut qlq chose au démontage
   )
 
-  return <div >
-    <h1>COUCOU HACKATHON</h1>
-    <Link to="generation">Go to form</Link>
-  </div>
-        
+  return <>
+    <div >
+      <h1>COUCOU HACKATHON</h1>
+      <Link to="generation">Aller au formulaire de création</Link>
+    </div>
+    <div>
+      <Link to="generationRecom">Aller à la recherche d'inspiration</Link>
+    </div>
+  </>
 }
 
 export default function Accueil() {

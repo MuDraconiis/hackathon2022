@@ -6,6 +6,7 @@ import Generation0 from './components/Generation0';
 import Generation1 from './components/Generation1';
 import Generation2 from './components/Generation2';
 import Generation3 from './components/Generation3';
+import GenerationRecom from './components/GenerationRecom';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="generation1" element={<Generation1 />} />
           <Route path="generation2" element={<Generation2 />} />
           <Route path="generation3" element={<Generation3 />} />
+          <Route path="generationRecom" element={<GenerationRecom />} />
         </Routes>
       </BrowserRouter>
 

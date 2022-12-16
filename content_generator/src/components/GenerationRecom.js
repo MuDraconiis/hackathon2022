@@ -34,6 +34,7 @@ export default function Generation() {
     const [promptPro, setPromptPro] = useState("");
     const [promptThe, setPromptThe] = useState("");
     const [promptEsp, setPromptEsp] = useState("");
+    const [keyWord, setKeyWord] = useState("Key word:" + promptCli + promptEsp + promptPro + promptThe);
     console.log(result)
 
 
@@ -53,46 +54,28 @@ export default function Generation() {
 
         const openai = new OpenAIApi(configuration);
         console.log(inputs)
-        const responseArgVente = await openai.createCompletion({
-            model: "text-davinci-003",
-            prompt: "Ecrit un résumé de cette application" +
-                "selon cette description: " + prompt + " mot clé:" + promptThe +
-                promptCli + promptPro + promptEsp,
-            max_tokens: 100,
-            presence_penalty: 2,
-            temperature: 1,
-            n: 10,
-        });
-
-        const responseTitre = await openai.createCompletion({
-            model: "text-davinci-003",
-            prompt: "Donne un nom à cette application en un mot" +
-                "selon cette description: " + prompt + " mot clé:"+ promptThe +
-               promptCli + promptPro + promptEsp,
-            max_tokens: 20,
-            presence_penalty: 2,
-            temperature: 1,
-            n: 10,
-            stop: " ",
-        });
-        console.log(prompt)
-        const responseImage = await openai.createImage({
-            prompt: "Donne un logo à cette application:" + prompt + " mot clé:" + promptThe +
-            promptCli + promptPro + promptEsp,
-            n: 10,
-            size: "256x256",
-        });
+        for(let i = 5; i < 5; i++){
+            const responseRecom = await openai.createCompletion({
+                model: "text-davinci-003",
+                prompt: "Give me a site made with the application GoodBarber with their description"
+                + keyWord,
+                max_tokens: 100,
+                presence_penalty: 2,
+                temperature: 1,
+            });
+    
+            console.log(prompt)
+            const responseImage = await openai.createImage({
+                prompt: "Give the main image from this site" + responseRecom.data.choices[0].text,
+                size: "256x256",
+            });
+            textes[i] = responseRecom.data.choices[i].text;
+            images[i] = responseImage.data.data[i].url;
+        }
+        
         // for(let i = 0; i < 12; i++){
         //     setConcat([responseTitre.data.choices[i].text, responseArgVente.data.choices[i].text, responseImage.data.data[i].url])
         // }
-        for (let i = 0; i < 10; i++) {
-            //   let concat = [responseText.data.choices[i].text, responseImage.data.data[i].url]
-            //   result[i] = concat
-            titres[i] = responseTitre.data.choices[i].text;
-            textes[i] = responseArgVente.data.choices[i].text;
-            images[i] = responseImage.data.data[i].url;
-        }
-        setTexte1(responseArgVente.data.choices[0].text)
         setSubmit(true)
     }
 
@@ -107,18 +90,10 @@ export default function Generation() {
         <div>{MyBody()}
             <div>
                 <h1>
-                    Avez vous une idée de l'application de vos rêves? Dites nous tout...
+                    A la recherche d'applications pour vous inspirer? On a ça pour vous!
                 </h1>
                 <div id="div_form">
                     <Form onSubmit={handleSubmit}>
-                        <Form.Group className="mb-3">
-                            <Form.Control
-                                className="app-input"
-                                placeholder="description de ce que tu veux"
-                                onChange={(e) => setPrompt(e.target.value)}
-                                as="textarea" rows={3}
-                            />
-                        </Form.Group>
                         {
                             submit == true ? (
                                 <>
@@ -199,37 +174,6 @@ export default function Generation() {
                                         <img className="img_article" src={images[4]}></img>
                                         <div className="text_article">{textes[4]}...</div>
                                     </div>
-                                    
-                                    <div id="article6" className="article">
-                                    <h4>{titres[5]}</h4>
-                                        <img className="img_article" src={images[5]}></img>
-                                        <div className="text_article">{textes[5]}...</div>
-                                    </div>
-                                    
-                                    <div id="article7" className="article">
-                                    <h4>{titres[6]}</h4>
-                                        <img className="img_article" src={images[6]}></img>
-                                        <div className="text_article">{textes[6]}...</div>
-                                    </div>
-                                    
-                                    <div id="article8" className="article">
-                                    <h4>{titres[7]}</h4>
-                                        <img className="img_article" src={images[7]}></img>
-                                        <div className="text_article">{textes[7]}...</div>
-                                    </div>
-                                    
-                                    <div id="article9" className="article">
-                                    <h4>{titres[8]}</h4>
-                                        <img className="img_article" src={images[8]}></img>
-                                        <div className="text_article">{textes[8]}...</div>
-                                    </div>
-                                    
-                                    <div id="article10" className="article">
-                                    <h4>{titres[9]}</h4>
-                                        <img className="img_article" src={images[9]}></img>
-                                        <div className="text_article">{textes[9]}...</div>
-                                    </div>
-
                                 </div>
                             </div>
                         ) : (
