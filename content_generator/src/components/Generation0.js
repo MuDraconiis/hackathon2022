@@ -139,51 +139,51 @@ export default function Generation0() {
             {images.length > 0 ? ( 
                 <div id="main_container">
                 <div id="articles_container" className="">
-                    <div id="article1" className="article">
+                    <div id="article1" className="article light">
                         <img className="img_article" src={images[0]}></img>
                         <div className="text_article">{texte1}</div>
                     </div>
-                    <div id="article2" className="article">
+                    <div id="article2" className="article dark">
                         <img className="img_article" src={images[1]}></img>
                         <div className="text_article">{textes[1]}</div>
                     </div>
-                    <div id="article3" className="article">
+                    <div id="article3" className="article light">
                         <img className="img_article" src={images[2]}></img>
                         <div className="text_article">{textes[2]}</div>
                     </div>
-                    <div id="article4" className="article">
+                    <div id="article4" className="article dark">
                         <img className="img_article" src={images[3]}></img>
                         <div className="text_article">{textes[3]}</div>
                     </div>
-                    <div id="article5" className="article">
+                    <div id="article5" className="article light">
                         <img className="img_article" src={images[4]}></img>
                         <div className="text_article">{textes[4]}</div>
                     </div>
-                    <div id="article6" className="article">
+                    <div id="article6" className="article dark">
                         <img className="img_article" src={images[5]}></img>
                         <div className="text_article">{textes[5]}</div>
                     </div>
-                    <div id="article7" className="article">
+                    <div id="article7" className="article light">
                         <img className="img_article" src={images[6]}></img>
                         <div className="text_article">{textes[6]}</div>
                     </div>
-                    <div id="article8" className="article">
+                    <div id="article8" className="article dark">
                         <img className="img_article" src={images[7]}></img>
                         <div className="text_article">{textes[7]}</div>
                     </div>
-                    <div id="article9" className="article">
+                    <div id="article9" className="article light">
                         <img className="img_article" src={images[8]}></img>
                         <div className="text_article">{textes[8]}</div>
                     </div>
-                    <div id="article10" className="article">
+                    <div id="article10" className="article light">
                         <img className="img_article" src={images[9]}></img>
                         <div className="text_article">{textes[9]}</div>
                     </div>
-                    <div id="article11" className="article">
+                    <div id="article11" className="article dark">
                         <img className="img_article" src={images[0]}></img>
                         <div className="text_article">{textes[0]}</div>
                     </div>
-                    <div id="article12" className="article">
+                    <div id="article12" className="article dark">
                         <img className="img_article" src={images[2]}></img>
                         <div className="text_article">{textes[2]}</div>
                     </div>
