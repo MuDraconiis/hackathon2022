@@ -18,15 +18,15 @@ function MyBody () {
   )
 
   return <>
-    <nav id="gbnav">
+    {/* <nav id="gbnav">
       <button id="gbnavbar-burger" title="menu" aria-label="menu" className="gbnavbar-burger--cross">
         <span>
 
         </span>
       </button>
       <Form.Label id="gblabel">GoodBarberXOpenAI</Form.Label>
-    </nav>
-    <div >
+    </nav> */}
+    <div id="page-title">
       <h1>GoodBarber</h1>
       <Link to="generation">Aller au formulaire de création</Link>
     </div>

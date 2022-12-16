@@ -18,6 +18,75 @@ function MyBody() {
 
 }
 
+function design() {
+
+    var articlecomplet = (document.getElementById("article12") && document.getElementsByClassName("text_article") && document.getElementsByClassName("titre_article") && document.getElementsByClassName("image_article"));
+    console.log("iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii " + articlecomplet)
+
+    if (articlecomplet) {
+        // 1 4
+        // 2 5
+        // 3 6
+        // 4 7
+        // 5 8
+        // 6 9
+        // 7 10
+        // 8 11
+        // 9 12
+
+        // var container= document.getElementById("main_container")
+        // console.log(container)
+        // if(container) console.log(container.style.marginTop)
+
+        var i = 1;
+        var marge = 50
+
+        for (var count = 0; count < 3; count++) {
+
+            var topdiv = document.getElementById("article" + i);
+            if (topdiv) console.log("div" + i + " " + topdiv.offsetHeight);
+            var bottomdiv = document.getElementById("article" + (i + 3));
+            //console.log(bottomdiv)
+            if (topdiv && bottomdiv) {
+                document.getElementById("article" + (i + 3)).style.marginTop = topdiv.offsetHeight + marge + "px"
+                marge += 50
+            }
+            i++
+        }
+
+        marge = 100
+
+        for (var count = 0; count < 3; count++) {
+
+            var topdiv1 = document.getElementById("article" + (i - 3));
+            var topdiv2 = document.getElementById("article" + i);
+            var bottomdiv = document.getElementById("article" + (i + 3));
+            //console.log(bottomdiv)
+            if (topdiv && bottomdiv) {
+                document.getElementById("article" + (i + 3)).style.marginTop = topdiv1.offsetHeight + topdiv2.offsetHeight + marge + "px"
+                marge += 50
+            }
+            i++
+        }
+
+        marge = 150
+
+        for (var count = 0; count < 3; count++) {
+
+            var topdiv1 = document.getElementById("article" + (i - 6));
+            var topdiv2 = document.getElementById("article" + (i - 3));
+            var topdiv3 = document.getElementById("article" + i);
+            var bottomdiv = document.getElementById("article" + (i + 3));
+            //console.log(bottomdiv)
+            if (topdiv && bottomdiv) {
+                document.getElementById("article" + (i + 3)).style.marginTop = topdiv1.offsetHeight + topdiv2.offsetHeight + topdiv3.offsetHeight + marge + "px"
+                marge += 50
+            }
+            i++
+        }
+    }
+
+}
 
 
 export default function Generation() {
