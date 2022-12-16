@@ -1,0 +1,117 @@
+#gblabel{
+    color: white;
+    box-sizing: border-box;
+    font-family: Jakarta,Arial,sans-serif !important;
+    font-size: 30px;
+    margin-left: 50px;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+
+
+button {
+    appearance: auto;
+    writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    letter-spacing: normal;
+    word-spacing: normal;
+    line-height: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: center;
+    align-items: flex-start;
+    cursor: default;
+    box-sizing: border-box;
+    margin: 0em;
+    padding: 1px 6px;
+    border-width: 2px;
+    border-style: outset;
+    border-image: initial;
+}
+
+#gbnavbar-burger>span::after {
+    content: "";
+    transform: translateY(8px);
+}
+
+#gbnavbar-burger>span {
+    top: 50%;
+    transform: translateY(-8px);
+}
+
+[type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
+    cursor: pointer;
+}
+
+#gbnavbar-burger>span::after, #gbnavbar-burger>span {
+    border-radius: 10px;
+    width: 100%;
+    height: 3px;
+    background-color: white;
+    position: absolute;
+    left: 0;
+    transition: transform .3s ease-in-out;
+}
+
+#gbnavbar-burger {
+    display: block;
+    appearance: none;
+    padding: 0;
+    margin: 0;
+    margin-right: 24px;
+    position: relative;
+    min-width: 30px;
+    height: 100%;
+    overflow: auto;
+}
+
+body {
+    font-family: Jakarta,Arial,sans-serif !important;
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+#gbnavbar-burger.gbnavbar-burger--cross>span {
+    transform: translateY(0) rotateZ(45deg);
+}
+
+#gbnavbar-burger.gbnavbar-burger--cross>span::after {
+    transform: translateY(0) rotateZ(-90deg);
+}
+
+button {
+    padding: 0;
+    margin: 0;
+    appearance: none;
+    background: 0;
+    border: 0;
+    color: inherit;
+    font: inherit;
+    -webkit-appearance: none;
+    cursor: pointer;
+}
+
+#gbnav{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 90px;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    background-color: rgba(28,42,57,0.9);
+    z-index: 10;
+    animation: navslide 500ms ease-out;
+}
