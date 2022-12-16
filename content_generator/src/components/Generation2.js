@@ -20,7 +20,7 @@ function MyBody() {
 
 }
 
-export default function Generation1() {
+export default function Generation2() {
 
     const [prompt, setPrompt] = useState("");
     const [result, setResult] = useState("");
